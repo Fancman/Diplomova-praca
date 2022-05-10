@@ -12,7 +12,7 @@ Medzi kamerami ktoré mám k dispozíci, je napríklad ANNKE T200 ktorá podporu
 
 # Postup 
 
-Plán mplementácie:
+Plán implementácie:
 - Pripojenie kamery k počítaču a zachytávanie obrazu pomocou OpenCV
 - Detekcia narušiteľa priestoru (jeden človek, skupinka ľudí)
 - Klasifikácia či je to človek a nie napriklad auto alebo zviera
