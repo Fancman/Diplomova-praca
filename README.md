@@ -6,10 +6,10 @@ Cieľom tejto diplomovej práce je preskúmať možnosti využitia infračerven�
 s vyššim pohybom osôb prípadne vonkajších priestorov budov. V práci analyzujem prípady použitia UV a IR spektier pri monitorovaní priestorov kamerou. 
 
 V časti implementácie:
-Pripojenie kamery k počítaču a zachýtávanie obrazu pomocou OpenCv
-Detekcia narušiteľa priestoru 
-Klasifikácia či je to človek a nie napriklad auto alebo zviera
-Identifikácia človeka podľa tváre
+- Pripojenie kamery k počítaču a zachýtávanie obrazu pomocou OpenCv
+- Detekcia narušiteľa priestoru (jeden človek, skupinka ľudí)
+- Klasifikácia či je to človek a nie napriklad auto alebo zviera
+- Identifikácia človeka podľa tváre
 
 ## Infračervené kamery
 
