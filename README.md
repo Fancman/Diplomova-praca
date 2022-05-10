@@ -1,4 +1,6 @@
-# Diplomova-praca
+# Diplomová práca - Využitie infračerveného žiarenia a termovízie na ochranu verejných priestorov a budov
+
+
 
 Cieľom tejto diplomovej práce je preskúmať možnosti využitia infračerveného žiarenia a termovízie pri ochrane priestorov 
 s vyššim pohybom osôb prípadne vonkajších priestorov budov. V práci analyzujem prípady použitia UV a IR spektier pri monitorovaní priestorov kamerou. 
