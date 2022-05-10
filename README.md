@@ -19,9 +19,27 @@ Medzi kamerami ktoré mám k dispozíci, je napríklad ANNKE T200 ktorá podporu
 
 # Články
 
-## An Effective Surveillance System Using Thermal Camera
+## An Effective Surveillance System Using Thermal Camera [1]
 
+V článku je predvedený postup zisťovania narušitela objektu. Postup je nasledovný:
 
-Zdroje:
+- Nastavenie kamery na zachytávanie teploty v rozmädzí 30-40 C.
+- Zachytávanie oobrázkov ve nekonečnom cykle
+- Rozdelenie jednodtlivých obrázkov na časti o veľkosti m x n pričom všetky časti majú rovnaký počet pixlov
+- Zadefinovanie matice pre každý región
+- Zadefinovanie premennej Q ktorá bude prahovaá hodnota pre rozdiel medzi súčtami hodnôt R, G, B kanálov po sebe dvoch po sebe zaznamenaných obrázkov
+- Zadefinovanie premennej h ktorá bude vyjadrovať početnosť pixlov ktorých rozdiel presiahol prah Q
+- Zadefinovanie H ako minimálna hodnota h (počtu pixlov presahujúcich prah h)
+- Porovnanie jednotlivých regionov aktuálneho obrázka a predošlého. Ak zmena medzi pixlami regiónov je väčšia ako prah tak sa zapíše 1 inač 0.
+- Zadefinovanie F ktoré vyjadruje počet vertikálnych pixlov ktoré sú vedľa seba bez prerušenia a majú hodnotu 1. Ak sú viacere vertikálne množiný, zoberie sa číslo väčšej.
+- Ako posledný krok sa nastaví prah G, ktorý ak presiahne F tak sa spustí alarm
 
-[https://ieeexplore.ieee.org/document/5163816](https://ieeexplore.ieee.org/document/5163816)
+Výsledky: 
+
+Vo výsledkoch je zdôvodnené že prečo je rozmädzie snímaných teplot 30-40 C a nie 30-40, je to z dôvodu že osoba môže mať na sebé hrubé oblečenie vďaka ktorému môže mať nižšiu vonkajšiu teplotu. V prípade že by bolo nastavene príliš veľké rozmädzie, napríklad 20-40 C tak by vznikalo veľa falošných poplachov z dôvodu že 20 C je izbová teplota a slnečné svetlo a žiarenie z lámp je tiež snímané IR kamerami. 
+
+Z testovaných 1000 obrázkov bolo úspešné identifikovanie prítomnosti narušiteľa 83.8%.
+
+# Zdroje:
+
+1. [https://ieeexplore.ieee.org/document/5163816](https://ieeexplore.ieee.org/document/5163816)
