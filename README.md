@@ -135,6 +135,37 @@ Detekcia je vykonaná v reálnom čase s použitím GPU trvá 17ms a pomocou CPU
 
 ![image](https://user-images.githubusercontent.com/5480663/167900624-87a4a989-df01-4a15-8344-3126c10410ea.png)
 
+## Thermal Imaging Dataset for Person Detection [5]
+
+Algoritmus na hľadanie tváre používa OpenCV knižnicu spolu s knižnicou mpi4py ktorá umožnuje používať paralelizmus. Ako vžpočtové zdroje boli použité 4 Dell servery, každý s 12 GB RAM. Aplikácia má detekovať tvár v reálnom čase.
+
+### Dataset
+
+Snímky postavy su zaznamenané v rôznych vzdialenostiach od kamery, dokopy ich je 500. Pozadie je homogenne s nízkou teplotou. Postup je modifikovaná verzia od in=ho výskumníka ktorá funguje tak že sa nájde hlava, krk, najviac vpravo a najviac vľavo bod.
+
+Algorimtus je rozdelený do troch častí: preprocesing, výpočet koordinácií pre extrakciu príkazov a vykreslenie stvorca okolo tváre.
+
+#### Preprocesing 
+
+- Vstup je obrázok s RGB kanálmi
+- R kanál je odstránený a vznikne 2D matica
+- Obrázok je skonvertovaný na čierno biely pomocou techniky zvanej thresholding
+- Použijú sa filtre s morfologickými operáciami ako je otváranie a zatváranie. Sú použité kvôli vyostreniu hrán
+- Hranice objektu su nájdené a uložené
+
+#### Výpočet koordinácií pre extrakciu príznakov
+
+- Zistenie počtu dôležitých pixelov v každom riadku alebo stĺpci
+- Headpoint (bod od ktorého začína hlava) sa hľadá postupným prechádzaním riadkov binárnej verzie obrázka a v prvom kde narazí na 1 je headpoint
+- Spraví sa histogram vertikálných pozícií pixlov a akumulované intenzity pixelov 
+- Náhla zmena vo vertikálnych intenzitách pixelov znamená že sme narazili na miesto kde sa hlava stretáva s ramenami - krk
+- Najviac pravý bod a najviac lavý bod sa nachádza medzi head point a neck point. Oba body sú na hrane ohraničujúceho obdĺžnika
+- Pomocou euklidovskej vzdialenosti sú vypočítané ďalšie body ohraničujúceho obžnika
+
+Výsledky:
+
+Hľadanie ohraničenia tváre trvalo priemerne 20 sekúnd.
+
 
 # Zdroje:
 
@@ -142,6 +173,7 @@ Detekcia je vykonaná v reálnom čase s použitím GPU trvá 17ms a pomocou CPU
 2. [Human Detection for Night Surveillance using Adaptive Background Subtracted Image](https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf)
 3. [Thermal Imaging Dataset for Person Detection](https://ieeexplore.ieee.org/document/8757208)
 4. [Real-Time Human Detection with Thermal Camera Feed using YOLOv3](https://ieeexplore.ieee.org/document/9342089)
+5. [Detection of Human Face by Thermal Infrared Camera Using MPI model and Feature Extraction Method](https://ieeexplore.ieee.org/document/8777581)
 
 
 Transfer learning - https://towardsdatascience.com/transfer-learning-with-convolutional-neural-networks-in-pytorch-dd09190245ce
