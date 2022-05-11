@@ -107,8 +107,23 @@ Po natáčaní a preprocessingu bolo získaných 20 minút za pekného počasia,
 
 Na anotácie bol použitý program Yolo BBox Annotation Tool kde sa postavy dajú ohraničovať pomocou bounding boxu a je spomenuté že výber programu na vytváranie anotácií záleží od metódy ktorá bude použitá na trénovanie modelu. Kontkrétne tento program podpruje YOLO, VOC, a MSCOCO formáty.
 
+## Real-Time Human Detection with Thermal Camera Feed using YOLOv3 [4]
+
+V tomto článku je predstavená implementácia algoritmu YOLOv3 na presnú detekciu ľudského tela v reálnom čase a podmienkých kedy obyčajná kamera určená pre viditeľné svetlo zlyháva. Na trénovanie a testovanie bolo použitých 47650 termálnych snímkov. Počas experimentov bolo možné identifikovať človeka už za 17 milisekúnd a precision 95.5%.
+
+Spomínané sú spôsoby detekcie osôb pomocou klasifikácie na základe príznkov ktoré sú zadefinované človekom a to (Histogram of Oriented Gradients) HoG ktorý bol spomenutý v prvom článku, Aggregated Channel Features (ACF) a Integral Channel Features (ICF) ktorú sú spomenuté ako najpopulárnejšie spôsoby klasifikácie. 
+
+Ďalej sú spomenuté klasifikácie pomocou CNN.  Region Proposal Network (RPN) s predtrénovanými váhami z ImageNet datasetu a potrebuje ako vstup termálny snímok a obyčajný. YOLOv2 ktorá používa 4 kanály RGB+T (T ako thermal).  Spomínané je spojenie snímku s viditeľným svetlom a termo snímku využité ResNet-152 ktoré využíva encoder a decoder. Zvyčajne sú rýchlejšie jedno prechodové detekčné techniky z ktorých sú najpopulárnejšie SSD a YOLO. YOLOv3 ma podobný výkon ako DSSD pričom DSSD he 3x rýchlejšie ako SSD. YOLOv3 má lepšiu "precision" pre menšie objekty ako technológie s dvoma prechodovými stupňami ktor= vyuýívajú regresiu, ResNET. FPN, G-RMI a TDM.
+
+Preto si vybrali YOLOv3 vzhľadom k tomu že využíva RGB obrázky, a má vyrovnáný kompromismedzi presnosťou a rýchlosťou.
+
+### YOLO detektor
+
+Je vhodný na použitie v reálnom čase a pri potrebé nízkej straty na presnosti. Algorimtus detekuje lokality s objektami spolu s zaradením do triedy. Snimka je rozdelená na menšie časti a pre každú sú vyhladané objekty a klasifikujú sa do tried spolu s výpočtom confidence score. YOLOv3 je vylepšená verzia YOLOv2 a má 53 vrstiev, 3x3 a 1x1 filtre trénovaná je na ImageNet datasete. Bounding box prediction je vylepšená aplikovaním 1x1 kernelov on troch odlišných miestách v sieti pre detekciu.Klasifikácia je vykonávaná pomocou logistickej regressie.
+
 # Zdroje:
 
-1. [https://ieeexplore.ieee.org/document/5163816](https://ieeexplore.ieee.org/document/5163816)
-2. [https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf](https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf)
-3. [https://ieeexplore.ieee.org/document/8757208](https://ieeexplore.ieee.org/document/8757208)
+1. [An Effective Surveillance System Using Thermal Camera](https://ieeexplore.ieee.org/document/5163816)
+2. [Human Detection for Night Surveillance using Adaptive Background Subtracted Image](https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf)
+3. [Thermal Imaging Dataset for Person Detection](https://ieeexplore.ieee.org/document/8757208)
+4. [Real-Time Human Detection with Thermal Camera Feed using YOLOv3](https://ieeexplore.ieee.org/document/9342089)
