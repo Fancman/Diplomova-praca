@@ -8,7 +8,7 @@ s vyššim pohybom osôb prípadne vonkajších priestorov budov. V práci anal
 
 Hlavné využitie je v podmienkách s nedostatočným prirodzeným osvetlením. Obyčajné kamery zobrazujú rôzne farby ktoré sú odrážané z objektov po dopade lúčov bieleho svetla. Toto nie je ale možné v noci, kedy ako jediný prirodzený svetelný zdroj je mesačné svetlo alebo umelé osvetlenie pomocou svietidiel. Infračervené svetlo je elektromagnetické žiarenie ktoré vyžaruje každý dosiaľ známy predmet, organizmus alebo vesmírny objekt.
 
-Medzi kamerami ktoré mám k dispozíci, je napríklad ANNKE T200 ktorá podporuje zaznamenávanie termovízie a infračerveného žiarenia. Rozdiel medzi nimi je ten že IR využíva krátke vlny IR žiarenia na oslvetlenie prostredia. Termovízia využíva stredné a dlhé vlny IR a dokážu iba identifikovať teplotu, najčastejšie ako biela - teplo a čierna - zima. Výhoda oproti kátkym vlnám IR je tá že záznam nie je rušený odrazovaným svetlom
+Medzi kamerami ktoré mám k dispozíci, je napríklad ANNKE T200 ktorá podporuje zaznamenávanie termovízie a infračerveného žiarenia. Rozdiel medzi nimi je ten že IR využíva krátke vlny IR žiarenia na osvetlenie prostredia. Termovízia využíva stredné a dlhé vlny IR a dokážu iba identifikovať teplotu, najčastejšie ako biela - teplo a čierna - zima. Výhoda oproti kátkym vlnám IR je tá že záznam nie je rušený odrazovaným svetlom
 
 # Postup 
 
@@ -85,9 +85,30 @@ Vo výsledkoch je zaznamenaný čas potrebný na spracovanie framu, "precision" 
 
 Čas spracovania záberú je pri samotnom HoG 1768.29s, HoG s "background subtraction" 23.0047s a pri dynamickej kamere 631.0068s iba s background suntraction a 478.0096 s "adaptive background suntraction"
 
+## Thermal Imaging Dataset for Person Detection [3]
 
+Článok popisuje vytváranie datasetu obrázkov za realistického počasia. Expiremnet bol vykonávaný vždy v noci, za pekného počasia, hmly a počas silného dažďa. Ľudia na fotkách napodobňovali ľudí, ktorý sa úmyselne snažia dostať na monitorované územie bez autorizácie, teda v rôznych vzdialenostiach od kamery, rôznymi rýchlosťami a pozíciami tela ako sú plazenie po rukách a nohách, skrývanie sa, zhrbená chôdza a behanie. 
+
+#### Snímanie za pekného počasia
+
+Prebehlo na lúke s malým lesíkom, čiže bolo možné vyskúšať záznamenávanie ľudí ako sa schvávajú z kríkmi a stromami. Lokalita v zábere má približne 180m na šírku a teplota bolo približne 2 C. Testovaná bola vzdialenosť 110 až 165m pričom sa používali dva typy šošoviek, jedna obučajná a jedná určná na vytváranie sústredených dialkových fotiek. Keď sa postavy vzďalovali od kamery do vzdialenosti 165m tak ich nebolo možné vidieť ľudským zrakom ani pomoocu obyčajných šošoviek. Na všetkých zachytených fotografiach je vidieť obrysy ľudí.
+
+#### Snímanie za hmly
+
+Vzhľadom na vysokú hustotu čiastočiek vody vo vzduchu sú dlhé vlny IR (LWIR) vysoko rozptýlené, čiže viditeľnosť pomocou termovízie je značne obmedzená. V tomto počasí bolo možné zachytiť obrysy človeka len do 30m obyčajnou šošovkou ad do 50m diaľkovou.
+
+#### Snímanie za ťažkého dažďa
+
+Pri snímaní sa vyskúšali vzdialenosti rovnaké ako pri peknom počasí a to 30, 70, 110, 140, 170, 180 a 215m a vo vštkých pózach ako pri preknom počasí. Pri vzdialenosti 215m bolo možné zachytiť obrysy človeka iba ďialkovými šošovkami.
+
+### Spracovanie údajov
+
+Po natáčaní a preprocessingu bolo získaných 20 minút za pekného počasia, 13 minút hmly a 15 minút ťažkého dažďa. Videa bolo postrihané a rozdelené podľa predefinovaných scenárov. Následná bola extrakcia snímkov pomocou Matlabu. Výsledkom bolo 11900 snímkov o veľkosti 1280x960 pre pekné počasie, 4905 hmlu a 7030 pre ťažký dažď. Následne sa rerezentatívne snímky pooznačovali anotáciami podľa rôznych aktivít, z rôzných vzdialenosti a rôzneho počasia. Výsledných bolo 7412 anotovaných snímkov.
+
+Na anotácie bol použitý program Yolo BBox Annotation Tool kde sa postavy dajú ohraničovať pomocou bounding boxu a je spomenuté že výber programu na vytváranie anotácií záleží od metódy ktorá bude použitá na trénovanie modelu. Kontkrétne tento program podpruje YOLO, VOC, a MSCOCO formáty.
 
 # Zdroje:
 
 1. [https://ieeexplore.ieee.org/document/5163816](https://ieeexplore.ieee.org/document/5163816)
 2. [https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf](https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf)
+3. [https://ieeexplore.ieee.org/document/8757208](https://ieeexplore.ieee.org/document/8757208)
