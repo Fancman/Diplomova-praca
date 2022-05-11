@@ -13,10 +13,13 @@ Medzi kamerami ktoré mám k dispozíci, je napríklad ANNKE T200 ktorá podporu
 # Postup 
 
 Plán implementácie:
-- Pripojenie kamery k počítaču a zachytávanie obrazu pomocou OpenCV
-- Detekcia narušiteľa priestoru (jeden človek, skupinka ľudí)
-- Klasifikácia či je to človek a nie napriklad auto alebo zviera
-- Identifikácia človeka podľa tváre
+
+- Zachytávanie snímok pomocou OpenCV
+- Vyskúšanie rôznych techník detekcie pohybujúcich sa objektov v zábere kamery
+- Porovnanie Accuracy, Precision, vzdialeností, podmienok
+- Klasifikácia či je to človek, a nie zviera alebo auto
+- Detekcia tváre a uloženie na spracovanie
+
 
 Pre jednotlivé kroky preskúmam existujúce riešenia a navrhnem také, ktoré sa bude najviac hodiť mojím potrebám. V sekcií "Članky" stručne popisujem techniky riešenia krokov z môjho plánu implementácie.
 
