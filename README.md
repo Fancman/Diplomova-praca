@@ -121,9 +121,27 @@ Preto si vybrali YOLOv3 vzhľadom k tomu že využíva RGB obrázky, a má vyrov
 
 Je vhodný na použitie v reálnom čase a pri potrebé nízkej straty na presnosti. Algorimtus detekuje lokality s objektami spolu s zaradením do triedy. Snimka je rozdelená na menšie časti a pre každú sú vyhladané objekty a klasifikujú sa do tried spolu s výpočtom confidence score. YOLOv3 je vylepšená verzia YOLOv2 a má 53 vrstiev, 3x3 a 1x1 filtre trénovaná je na ImageNet datasete. Bounding box prediction je vylepšená aplikovaním 1x1 kernelov on troch odlišných miestách v sieti pre detekciu.Klasifikácia je vykonávaná pomocou logistickej regressie.
 
+Z 95 000 obrázkov sa vybral subset so 742 snímkov s ľudmi ktoré sú zozbierané preskakovaním 20 snímkov pre tréning spolu s 30 snímkov s chodcami. Postavy boli pooznačované bounding boxami s programom LabelImg.
+
+#### Tréning
+
+Na vyriešenie toho že CNN potrebuje na natrénovanie a väčšie datasety ako Microsoft COCO, Caltech, ImageNet nemajú veľké množstvo snímok zachytených termo kamerou. Používa preto predtrénované vahy podľa COCO a je dodatočne dotrénovaná pomocou "Transfer learning"-u čo znamená že posledné vrstvy v CNN modeli natrénujeme datasetom nasších obrázkov. Myšlienka je za tym taká že nižšie vrstvy aj tak využívajú iba low level príznaky ktoré sú spoločné naprieč datasetmi. 
+
+V tomto prípade sa zoberú váhy po natrénovaní pre triedu "human" po 1000 iteráciach a model sa odtestuje. Pre model by mala optimálne vyjsť "loss" menšia 2.
+
+#### Výsledky
+
+Detekcia je vykonaná v reálnom čase s použitím GPU trvá 17ms a pomocou CPU 7-8 sekúnd. "Average precision" vyšla 95.15% V porovnaní o ostatnými technikami sa rapídne znížil missrate.
+
+![image](https://user-images.githubusercontent.com/5480663/167900624-87a4a989-df01-4a15-8344-3126c10410ea.png)
+
+
 # Zdroje:
 
 1. [An Effective Surveillance System Using Thermal Camera](https://ieeexplore.ieee.org/document/5163816)
 2. [Human Detection for Night Surveillance using Adaptive Background Subtracted Image](https://arxiv.org/ftp/arxiv/papers/1709/1709.09389.pdf)
 3. [Thermal Imaging Dataset for Person Detection](https://ieeexplore.ieee.org/document/8757208)
 4. [Real-Time Human Detection with Thermal Camera Feed using YOLOv3](https://ieeexplore.ieee.org/document/9342089)
+
+
+Transfer learning - https://towardsdatascience.com/transfer-learning-with-convolutional-neural-networks-in-pytorch-dd09190245ce
