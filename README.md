@@ -29,6 +29,8 @@ Naštudované članky:
 
 [Seminárna práca 2](./seminarna_praca_2.md)
 
+[Prezentácia 2](./prezentacia_2.pdf)
+
 [Návod na spustenie](./src/README.md)
 
 Progres:
