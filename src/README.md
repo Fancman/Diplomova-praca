@@ -15,3 +15,9 @@ Ja kod spustam tak ze mam vytvoreny virtualny enviroment v programe Conda, ale m
 `python main.py`
 
 Zobrazi sa okno v ktorom sa prehravaju snimky videa a detekovane objekty su ohranicene v bounding boxoch.
+
+Použité knižnice:
+
+- [Pytorch](https://github.com/pytorch/pytorch)
+- [Yolov5](https://github.com/ultralytics/yolov5)
+- [OpenCV](https://github.com/opencv/opencv)
